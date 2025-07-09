@@ -1,0 +1,170 @@
+<div id="btns-container">
+  <div class="btns-row row1">
+    <a class="faq-btn pressed">SERVICES</a>
+    <a class="faq-btn">PACKAGES</a>
+    <a class="faq-btn">PAYMENTS</a>
+  </div>
+  <div class="btns-row row2">
+    <a class="faq-btn">OPERATIONS</a>
+    <a class="faq-btn">DATA</a>
+  </div>
+</div>
+
+<style>
+  #btns-container, .btns-row {
+  	display: flex;
+    margin: 0;
+  }
+  
+  #btns-container { height: 50px; }
+  
+  .btns-row.row1 { width: 60% }
+  .btns-row.row2 { width: 40% }
+  
+  .faq-btn {
+    text-align: center;
+  	color: white;
+    background-color: #680000;
+    /*padding: 15px 20px;*/
+    font-family: "Trebuc" !important;
+    font-size: 20px;
+    width: 100%;
+    align-content: center;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all .5s ease;
+  }
+  
+  .pressed, .faq-btn:hover {
+  	color: black;
+    background-color: white;
+  }
+  
+  @media (max-width:767px) {
+    #btns-container { 
+      flex-direction: column;
+      height: 90px;
+    }
+    
+    .btns-row { 
+      width: 100% !important; 
+      height: 100%; 
+    }
+    
+  	.btns-row.row2 { 
+      width: 66% !important; 
+      margin: auto;
+    }
+    .faq-btn { font-size: 14px; }
+    
+    .row1 > .faq-btn:first-child { 
+      border-top-left-radius: 5px; 
+      border-bottom-left-radius: 5px; 
+    }
+    .row1 > .faq-btn:last-child { 
+      border-top-right-radius: 5px; 
+      border-bottom-right-radius: 5px; 
+    }
+    
+    .row2 > .faq-btn:first-child { 
+      border-bottom-left-radius: 5px;  
+    }
+    .row2 > .faq-btn:last-child { 
+      border-bottom-right-radius: 5px;  
+    }
+  }
+  
+  @media (min-width:768px) {
+    .row1 > .faq-btn:first-child { 
+      border-top-left-radius: 5px; 
+      border-bottom-left-radius: 5px; 
+    }
+    .row2 > .faq-btn:last-child { 
+      border-top-right-radius: 5px; 
+      border-bottom-right-radius: 5px;  
+    }
+  }
+  
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const isMobile = window.matchMedia('screen and (max-width: 767px)').matches;
+    const btns_container = document.getElementById("btns-container");
+  	const faq_headers = Array.from(document.getElementsByClassName("faq-header"));
+    const faq_btns = Array.from(document.getElementsByClassName("faq-btn"));
+    
+    let timer = null;
+    let btn_clicked = false;
+    
+    for(let h in faq_headers) {
+      const header_id = faq_headers[h].id;
+      faq_btns[h].href = "#" + header_id;
+      faq_btns[h].addEventListener("click", function() { 
+        btn_clicked = true; 
+        btnPressed(faq_btns[h]);
+      });
+    }
+    
+    window.addEventListener("scroll", function () {
+      // Detect if screen is scrolling because of button click
+      if(timer !== null && btn_clicked) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(function() {
+        btn_clicked = false;
+      }, 150);
+      
+      // If screen is scrolling NOT because of button click,
+      // highlight button based on section in view
+      if(!btn_clicked) {
+        for(let h in faq_headers) {
+          if(isInViewport(faq_headers[h], isMobile) && !faq_btns[h].classList.contains("pressed")) {
+            btnPressed(faq_btns[h]);
+            break;
+          }
+        }
+      }
+      
+      if(!isMobile) squashOnScrollDepth(btns_container, 30, 50, 200);
+      else squashOnScrollDepth(btns_container, 50, 90, 200);
+    });
+  });
+  
+  // check if element is in a specific part of the screen
+  // Detects vertical position only
+  function isInViewport(element, isMobile) {
+    let rect = element.getBoundingClientRect();
+    let html = document.documentElement;
+    let top_margin = /*122*/ -50;
+    
+    //if (isMobile) { top_margin = 175; }
+    
+    return (
+      rect.top >= top_margin &&
+      rect.bottom <= (window.innerHeight * .5 || html.clientHeight * .5)
+    );
+  }
+  
+  // switch pressed button
+  function btnPressed(button_pressed) {
+    let btns = document.getElementsByClassName("pressed");
+    for (var i = 0; i < btns.length; i++) {
+    	btns[i].classList.remove("pressed");
+	}
+    button_pressed.classList.add("pressed");
+  }
+  
+  function squashOnScrollDepth(elem, min_height, 
+                               max_height, max_scroll_depth) {
+  	const scroll_pos = window.scrollY;
+    const subtract_height = max_height - min_height;
+    const divide_scroll_depth = max_scroll_depth / subtract_height;
+    if(scroll_pos <= max_scroll_depth) {
+      elem.style.height = (max_height - 
+                           (scroll_pos / divide_scroll_depth)) + "px";
+    }
+    else { elem.style.height = min_height; }
+  }
+</script>
