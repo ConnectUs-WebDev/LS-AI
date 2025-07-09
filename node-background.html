@@ -1,0 +1,80 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Make the wave effect stick inside the section */
+    .wave-container {
+        position: absolute; /* Sticks inside the section */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center it */
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        pointer-events: none; /* Avoid blocking interactions */
+        z-index: 0; /* Stays behind content */
+        background: transparent;
+    }
+
+    .wave-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .wave-bar {
+        list-style: none;
+        width: var(--bar-width, 20px);
+        height: var(--bar-height, 150px);
+        margin: var(--bar-margin, 5px);
+        border-radius: 10px;
+        background: rgba(71, 6, 7, 0.7);
+        animation: waveAnimation var(--duration, 1.2s) infinite alternate ease-in-out;
+        animation-delay: var(--delay, 0s);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .wave-bar { --bar-width: 15px; --bar-height: 120px; --bar-margin: 4px; }
+    }
+
+    @media (max-width: 480px) {
+        .wave-bar { --bar-width: 10px; --bar-height: 100px; --bar-margin: 3px; }
+    }
+
+    /* Wave Animation */
+    @keyframes waveAnimation {
+        from { transform: scaleY(0.4); }
+        to { transform: scaleY(1.6); }
+    }
+</style>
+
+<!-- Background Wave Effect -->
+<div class="wave-container">
+    <ul class="wave-wrapper"></ul>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const wrapper = document.querySelector(".wave-wrapper");
+
+        for (let i = 0; i < 25; i++) {
+            let bar = document.createElement("li");
+            bar.classList.add("wave-bar");
+
+            // Apply random animation delay and duration
+            bar.style.setProperty('--delay', `${(Math.random() * 0.6).toFixed(2)}s`);
+            bar.style.setProperty('--duration', `${(1 + Math.random() * 0.6).toFixed(2)}s`);
+
+            wrapper.appendChild(bar);
+        }
+    });
+</script>
