@@ -1,0 +1,151 @@
+<div class="voice-card-grid">
+	<div class="voice-record-card first">
+		<img id="btn-1" class="play-pause-button" 
+			src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-play="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-pause="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa11449c393e5d1b64e3.png"
+			data-audio="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6862faad4559e4f6b0b5ee48.mpeg" 
+				alt="play button">
+	</div>
+	<div class="voice-record-card second">
+		<img id="btn-2" class="play-pause-button" 
+			src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-play="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-pause="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa11449c393e5d1b64e3.png"
+			data-audio="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6862fa6d40af7e49ff064e42.mpeg" 
+				alt="play button">
+	</div>
+	<div class="voice-record-card third">
+		<img id="btn-3" class="play-pause-button" 
+			src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-play="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-pause="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa11449c393e5d1b64e3.png"
+			data-audio="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6862faaa5ffbefd12799082f.mpeg" 
+				alt="play button">
+	</div>
+	<div class="voice-record-card fourth">
+		<img id="btn-4" class="play-pause-button" 
+			src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-play="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa119020da335e809f28.png" 
+			data-pause="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/680aaa11449c393e5d1b64e3.png"
+			data-audio="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/686416ae78d3fe011b36209e.mpeg" 
+			alt="play button">
+	</div>
+</div>
+
+<style>
+.voice-card-grid {
+    display: flex;
+    justify-content: center; /* Centers the cards in the container */
+    align-items: center;
+    gap: 20px; /* Spacing between the cards */
+    width: 100%;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.voice-record-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    width: 260px;
+    height: 290px;
+    background-size: cover;
+    background-position: center;
+    background-color: black;
+  position:relative;
+}
+
+.voice-record-card img {
+  width: 50px; 
+  position:absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Background images for each card */
+.voice-record-card.first { background-image: url('https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68430afe4cd9daea2bde7e65.png'); }
+.voice-record-card.second { background-image: url('https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68430affd6c85548ff0d9caa.png'); }
+.voice-record-card.third { background-image: url('https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68430afe70766a6eafac79fd.png'); }
+.voice-record-card.fourth { background-image: url('https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68430afe0cf986c00cf245aa.png'); }
+
+/* Responsive adjustments */
+@media only screen and (max-width: 1024px) {
+	.voice-card-grid {
+		justify-content: center;
+		flex-wrap: wrap; /* Ensures cards stack in two rows */
+	}
+
+	.voice-record-card {
+		width: 45%; /* Each card takes almost half width */
+		background-position: 50% 10%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.voice-card-grid {
+		flex-direction: column; /* Stacks into a single column */
+		align-items: center;
+	}
+
+	.voice-record-card {
+		width: 100%; /* Cards take full width */
+	}
+}
+
+/*@media only screen and (min-width: 1200px) {
+	.voice-record-card {
+		width: 350px;
+		height: 350px;
+	}
+}*/
+
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let btnId = null;
+  let currentAudio = null; // Tracks currently playing audio url
+  let currentButton = null; // Tracks the button linked to the playing audio
+  const player = new Audio(); // The player that will play the recordings
+
+  document.querySelectorAll(".play-pause-button").forEach(button => {
+    button.addEventListener("click", function () {
+      // Sets Audio source if button is different from the current one
+      if (btnId !== button.id) {
+        player.pause();
+        if(currentButton) {
+          currentButton.src = currentButton.dataset.play; // Reset the previous button
+          currentButton.dataset.state = "paused";
+        }
+        btnId = button.id;
+        currentButton = button;
+        currentAudio = button.dataset.audio
+        player.crossOrigin = "anonymous";
+        player.src = currentAudio;
+      }
+
+      // Toggle play/pause for the clicked button
+      if (player.paused) {
+        // Play currently set audio in the player
+        player.play();
+
+        button.src = button.dataset.pause;
+        button.dataset.state = "playing";
+      }
+      else {
+        player.pause();
+        player.currentTime = 0;
+        button.src = button.dataset.play;
+        button.dataset.state = "paused";
+      }
+    });
+  });
+  // Reset button when audio ends
+  player.addEventListener("ended", function () {
+    currentButton.src = currentButton.dataset.play;
+    currentButton.dataset.state = "paused";
+  });
+});
+
+</script>
