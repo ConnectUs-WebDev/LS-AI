@@ -1,0 +1,827 @@
+
+<style>
+  #custom-code-nz5dk6xOEF {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .slider {
+    background: transparent;
+    margin: auto;
+    /* overflow: hidden; */
+    position: relative;
+    width: 1160px;
+  }
+
+  .slider::before,
+  .slider::after {
+    background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
+    content: "";
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+  }
+
+  .slider::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  .slider::before {
+    left: 0;
+    top: 0;
+  }
+
+  .slider .slide-track {
+    display: flex;
+    width: 1080px;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .slide {
+    width: 250px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.125);
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  .profile-image-container {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .profile-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(71, 6, 7, 0.9);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /*.profile-image-container:hover .profile-overlay {
+  opacity: 1;
+  }*/
+
+  .slide:hover img {
+    scale: 1.05;
+  }
+
+  /* .slide:has(> .profile-image-container:hover) + .tooltip__item, .profile-image-container:hover + .tooltip__item, .tooltip__item:hover {
+  visibility: visible;
+  opacity: 1;
+  } */
+
+
+  /*.slide:hover + .tooltip__item,
+  .tooltip__item:hover {
+  visibility: visible;
+  opacity: 1;
+  } */
+
+  .profile-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: scale 0.3s ease;
+  }
+
+  .profile-text-container {
+    background-color: #470607;
+    padding: 10px;
+    height: 100px;
+  }
+
+  .slide-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    padding: 5px 0;
+  }
+
+  .slide-pos {
+    font-size: 16px;
+    margin: 0;
+    padding: 5px 0;
+  }
+
+  /* Mobile adjustments */
+  /* @media (max-width: 768px) {
+  .slider .slide-track {
+  animation: scroll 10s linear infinite;
+
+  }
+
+  @keyframes scroll {
+  0% {
+  transform: translateX(0);
+  }
+  100% {
+  transform: translateX(-100%);
+  }
+  }
+
+  .slide {
+  width: 90%;
+  max-width: 350px;
+  }
+  }  */
+
+  @media (max-width: 768px) {
+    .tooltip__item {
+      display: none !important;
+    }
+  }
+
+  /*@media (min-width: 1024px) {
+  .slide-clone {
+  display: none;
+  }
+  }*/
+
+  .slider {
+    overflow: hidden !important;
+  }
+
+  .slide-track {
+    display: flex !important;
+    padding-left: 10px;
+    width: max-content !important;
+    animation: scrollLoop 55s linear infinite !important;
+  }
+
+  @media (min-width: 1024px){
+    .slide {
+      /*width: 90vw !important;*/
+      flex-shrink: 0 !important;
+    }
+
+    @keyframes scrollLoop {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .slide {
+      width: 90vw;
+      flex-shrink: 0;
+    }
+
+    @keyframes scrollLoop {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+
+  /* Desktop adjustments */
+  @media (min-width: 769px) {
+    .slider .slide-track {
+      flex-direction: row;
+      animation: none;
+    }
+
+    .slide {
+      width: 250px;
+    }
+  }
+
+  .moving-slide {
+    transition: right 0.3s ease;
+    position: relative;
+    right: 0;
+  }
+
+  /*#slide2:has(> .profile-image-container:hover), #slide2:has(+ .tooltip-right:hover) {
+  right: 260px;
+  z-index: 2;
+  }
+
+  #slide3:has(> .profile-image-container:hover), #slide3:has(+ .tooltip-right:hover) {
+  right: 520px;
+  z-index: 2;
+  }
+
+
+  #slide4:has(> .profile-image-container:hover), #slide4:has(+ .tooltip-right:hover) {
+  right: 780px;
+  z-index: 2;
+  }*/
+
+  .tooltip {
+    position: relative;
+  }
+  .tooltip__item {
+    position: absolute;
+    top: 0;
+    text-align: left;
+    visibility: hidden;
+    opacity: 0;
+    min-width: 100px;
+    min-height: 270px;
+    padding: 10px;
+    background: white;
+    transition: all .250s cubic-bezier(0, 0, 0.2, 1);
+    color: #484848;
+    border: 1px solid #cecece;
+    border-radius: 3px;
+    font-weight: 500;
+    box-shadow: 0 2px 1px #bcbcbc;
+    z-index: 4;
+  }
+  .tooltip-right {
+    left: 280px;
+  }
+  .tooltip-left {
+    right: 280px;
+  }
+
+  @media (min-width: 1024px) {
+    .popup-ls-container { 
+      padding-top: 73px !important; 
+      height: 100vh !important;
+    }
+
+    .right-side-text {
+      justify-content: start !important;
+    }
+  }
+
+  .popup-ls-container {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    padding: 75px 0 15px 0;
+    height: 100vh;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6); 
+    display: flex;
+    justify-content: center;
+  }
+
+  .left-image-side,
+  .right-side-text {
+    width: 100%;
+  }
+
+  .profile-container {
+    display: none;
+    border-radius: 10px;
+    width: 70%;
+    height: 85%;
+    padding: 1em;
+    background-color: #fff;
+    /* display: flex; */
+    justify-content: stretch;
+    margin: auto;
+    position: relative;
+  }
+
+  .left-image-side {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+  }
+
+  .left-image-side img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .right-side-text {
+    padding: 1em;
+    position: relative;
+    width: 100%;
+    overflow-y: scroll;
+  }
+
+  .right-side-text h1 {
+    color: #470607;
+  }
+
+  .right-side-text strong{
+    color: #470607;
+  }
+
+  .right-side-text p {
+    color: #000;
+  }
+
+  .right-side-text h1 {
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
+  }
+
+
+
+  .button-close {
+    display: block;
+    position: absolute;
+    right: -.7em;
+    top: -1.2em;
+    width: 48px;
+    height: 48px;
+    background: #fff;
+    color: #3d1d21;
+    border: 1px solid #3d1d21;
+    outline: none;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  .button-close:hover::before,
+  .button-close:hover::after {
+    border-left: 15px solid currentColor;
+    border-right: 15px solid currentColor;
+  }
+
+  .button-close::before,
+  .button-close::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 1px;
+    border-left: 8px solid currentColor;
+    border-right: 8px solid currentColor;
+    transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    transition: all .2s cubic-bezier(.25, .46, .45, .94);
+  }
+
+  .button-close::after {
+    transform: translate3d(-50%, -50%, 0) rotate(45deg);
+  }
+
+
+  .header-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-bottom: 1em;
+  }
+
+  .header-profile h1 {
+    margin: 0;
+    color: #470607;
+  }
+
+  .header-profile span {
+    margin-top: 0.2em;
+    font-size: 15px;
+    color: #7d7c7c;  
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .profile-container {
+      flex-direction: column;
+      height: 85vh;
+      width: 90%;
+    }
+    .left-image-side {
+      width: 100%;
+      height: 50%;
+    }
+
+    .left-image-side img {
+      object-position: 50% 30%;
+    }
+
+  }
+</style>
+
+<div class="slider">
+  <div class="slide-track">
+    <div class="slide moving-slide">
+      <a href="" id="thea-profile" class="thea-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/67a3c26fa660aa7a04db30c8.jpeg" alt="Thea" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">Thea</p>
+          <p class="slide-pos">President</p>
+        </div>
+      </a>
+    </div>
+    <div class="tooltip__item tooltip-right">
+      <strong>Background:</strong> A visionary leader with a proven track record of building and scaling successful business process outsourcing companies since 2004. Passionate about providing quality work for associates and creating valuable solutions that empower businesses to thrive.<br><br>
+      <strong>Specialties:</strong> Business development, leadership training, marketing & sales strategies to implementation and client management.<br><br>
+      <strong>Fun Fact:</strong> She has run marathons in New York, Manila, Paris, Chicago, Berlin, London, and soon Tokyo and Boston..and she doesn't even like running. She likes the challenge of accomplishing what few people can..and she loves dark chocolates.<br><br>
+      <strong>Invested Since:</strong> 2009
+    </div>
+
+    <div id="slide2" class="slide moving-slide">
+      <a href="" id="alexa-profile" class="alexa-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68150142cf32b05ec7c17f7a.jpeg" alt="Alexa" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">Alexa</p>
+          <p class="slide-pos">Operations Director</p>
+        </div>
+      </a>
+    </div>
+    <div class="tooltip__item tooltip-right"><strong>Background:</strong> A results-oriented chief systems architect with extensive experience in streamlining processes and maximizing efficiency.  She also has a strong background in advertising and marketing.<br><br>
+      <strong>Specialties:</strong> Project management, operation process optimization, strategies, and client management.<br><br>
+      <strong>Fun Fact:</strong>  A secret chef at heart, she loves immersing herself in different cultures through travel, trying different cuisines, and replicating the savory dishes in her spare time.<br><br>
+      <strong>Invested Since:</strong> 2014</div>
+
+    <div id="slide3" class="slide moving-slide">
+      <a href="" id="jessica-profile" class="jessica-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6814fe9f88cf5cfbf3f54ec1.png" alt="Jessica" />
+          <div class="profile-overlay"></div>
+        </div>
+
+        <div class="profile-text-container">
+          <p class="slide-name">Jessica</p>
+          <p class="slide-pos">Operations Manager</p>
+        </div>
+      </a>
+    </div>
+    <div class="tooltip__item tooltip-right"><strong>Background:</strong> She has quickly climbed the corporate ladder for her excellent performance all throughout her career.  From top caller to Campaign Manager, she has also risen to become a Team Leader and Assistant Trainer, where she played a key role in establishing the training department.  Now, she is one of the strongest Operations Managers in the Telemarketing Department.<br><br>
+      <strong>Specialties:</strong> Team leadership and training, campaign management, strategic planning and implementation<br><br>
+      <strong>Fun Fact:</strong>  She has accomplished working full time as a top caller, while obtaining a degree in Criminology.  Former cheerleader and karate-do college varsity athlete, she now cheers on her team and figuratively beats up those who don’t hit quota.<br><br>
+      <strong>Invested Since:</strong> 2017</div>
+
+    <div id="slide4" class="slide moving-slide">
+      <a href="" id="elle-profile" class="elle-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/67a3c26f7fd0c81d877987fa.jpeg" alt="Elle" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">Elle</p>
+          <p class="slide-pos">Executive Administrator</p>
+        </div>
+      </a>
+    </div>
+    <div class="tooltip__item tooltip-right"><strong>Background:</strong> Once hesitant to step out of her comfort zone, Elle has transformed into a key player working closely with the President. She also collaborates with various departments, supports decision-making, and plays a crucial role in project & crisis management, where she continues to grow and make significant contributions.<br><br>
+      <strong>Specialties:</strong> High-level administrative support to executives and senior associates, focusing on several key areas: calendar management, communication, and document organization.<br><br>
+      <strong>Fun Fact:</strong> An aspiring graphic designer, she won two VIP tickets to her favorite band's concert in 2019 with a last minute cutout animated video. Being the President’s psychologist is her part-time job.<br><br>
+      <strong>Invested Since:</strong> 2021</div>
+
+    <div id="slide5" class="slide moving-slide">
+      <a href="" id="kenneth-profile" class="kenneth-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6848853c2c3d76c09a6a4f23.png" alt="kenneth" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">Kenneth</p>
+          <p class="slide-pos">Senior Administrative Officer</p>
+        </div>
+      </a>
+    </div>
+    <div id="slide6" class="slide moving-slide">
+      <a href="" id="cathy-profile" class="cathy-profile">
+        <div class="profile-image-container">
+          <img src="https://assets.cdn.filesafe.space/QvdmKDKOqF54gPMj0J13/media/6848b5f82c3d760d346acb8f.png" alt="cathy" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">Cathy</p>
+          <p class="slide-pos">Client & Employee Relations</p>
+        </div>
+      </a>
+    </div>
+    <div class="tooltip__item tooltip-right"><strong>Background</strong>: She has started out as a telemarketer, who eventually embraced her role in sales and client relations.  Cathy understands that good quality services of our staff is key when she presents the business.  And so she also involves herself in employee relations to fully collaborate with the team and make sure that our service is at its best.<br><br>
+      <strong>Specialties</strong>: Marketing, business development, client relations, operations<br><br>
+      <strong>Fun Fact</strong>: You will never see her in a bad mood.  She will be the sweetest co-worker you will ever have!  She has the kindest heart, and loves Jesus the most.<br><br>
+      <strong>Invested Since</strong>: 2016
+    </div>
+
+    <div id="slide7" class="slide moving-slide">
+      <a href="" id="ailyn-profile" class="ailyn-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68111299eb94a8a2250add7a.png" alt="ailyn" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">Ailyn</p>
+          <p class="slide-pos">Employee Relations Officer</p>
+        </div>
+      </a>
+    </div>
+
+    <div id="slide8" class="slide moving-slide">
+      <a href="" id="april-profile" class="april-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6830aef4be318f21c19ec283.png" alt="april" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">April</p>
+          <p class="slide-pos">Human Resources Specialist</p>
+        </div>
+      </a>
+    </div>
+
+    <div id="slide9" class="slide moving-slide">
+      <a href="" id="nikka-profile" class="nikka-profile">
+        <div class="profile-image-container">
+          <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6830afb3dd67d1db3987ac92.png" alt="nikka" />
+          <div class="profile-overlay"></div>
+        </div>
+        <div class="profile-text-container">
+          <p class="slide-name">Nikka</p>
+          <p class="slide-pos">Recruitment Department Manager</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Start of Popup -->
+<div class="popup-ls-container">
+  <div id="thea-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side"> <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/67a3c26fa660aa7a04db30c8.jpeg" alt="Thea" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Thea </h1>
+        <span>President</span>
+      </div>
+      <strong>Background:</strong> <p>A visionary leader with a proven track record of building and scaling successful business process outsourcing companies since 2004. Passionate about providing quality work for associates and creating valuable solutions that empower businesses to thrive</p> <br><br>
+      <strong>Specialties:</strong>  <p> Business development, leadership training, marketing & sales strategies to implementation and client management.</p><br><br>
+      <strong>Fun Fact:</strong>  <p> She has run marathons in New York, Manila, Paris, Chicago, Berlin, London, and soon Tokyo and Boston..and she doesn't even like running. She likes the challenge of accomplishing what few people can..and she loves dark chocolates. </p>  <br><br>
+      <strong>Invested Since:</strong>  <p>2009</p> 
+    </div>
+  </div>
+  <div id="alexa-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">  <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68150142cf32b05ec7c17f7a.jpeg" alt="Alexa" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Alexa </h1>
+        <span>Operations Director</span>
+      </div>
+      <strong>Background:</strong> <p> A results-oriented chief systems architect with extensive experience in streamlining processes and maximizing efficiency.  She also has a strong background in advertising and marketing.  </p> <br><br>
+      <strong>Specialties:</strong>  <p> Project management, operation process optimization, strategies, and client management.</p><br><br>
+      <strong>Fun Fact:</strong>  <p> A secret chef at heart, she loves immersing herself in different cultures through travel, trying different cuisines, and replicating the savory dishes in her spare time. </p>  <br><br>
+      <strong>Invested Since:</strong>  <p>2014</p> 
+    </div>
+  </div>
+  <div id="jessica-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">   <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6814fe9f88cf5cfbf3f54ec1.png" alt="Jessica" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Jessica</h1>
+        <span>Operations Director</span>                  
+      </div>
+      <strong>Background:</strong> <p>  She has quickly climbed the corporate ladder for her excellent performance all throughout her career.  From top caller to Campaign Manager, she has also risen to become a Team Leader and Assistant Trainer, where she played a key role in establishing the training department.  Now, she is one of the strongest Operations Managers in the Telemarketing Department.</p> <br><br>
+      <strong>Specialties:</strong>  <p> Team leadership and training, campaign management, strategic planning and implementation.</p><br><br>
+      <strong>Fun Fact:</strong>  <p>  She has accomplished working full time as a top caller, while obtaining a degree in Criminology.  Former cheerleader and karate-do college varsity athlete, she now cheers on her team and figuratively beats up those who don’t hit quota.</p>  <br><br>
+      <strong>Invested Since:</strong>  <p>2017</p> 
+    </div>
+  </div>
+  <div id="elle-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">  <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/67a3c26f7fd0c81d877987fa.jpeg" alt="Elle" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Elle</h1>
+        <span>Executive Administrator</span>
+      </div>
+      <strong>Background:</strong> <p> Once hesitant to step out of her comfort zone, Elle has transformed into a key player working closely with the President. She also collaborates with various departments, supports decision-making, and plays a crucial role in project & crisis management, where she continues to grow and make significant contributions.</p> <br><br>
+      <strong>Specialties:</strong>  <p> High-level administrative support to executives and senior associates, focusing on several key areas: calendar management, communication, and document organization.</p><br><br>
+      <strong>Fun Fact:</strong>  <p>  An aspiring graphic designer, she won two VIP tickets to her favorite band's concert in 2019 with a last minute cutout animated video. Being the President’s psychologist is her part-time job.</p>  <br><br>
+      <strong>Invested Since:</strong>  <p>2021</p> 
+    </div>
+  </div>
+
+  <div id="kenneth-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">  <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6848853c2c3d76c09a6a4f23.png" alt="Kenneth" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Kenneth</h1>
+        <span>Senior Administrative Officer</span>
+      </div>
+      <strong>Background:</strong> <p>Leads the back-office support team to ensure that the company is compliant with the local and national government permits and tax requirements.  He takes care of health and safety protocols, to allow the rest of the team to focus on core operations.</p><br><br>
+      <strong>Specialties:</strong> <p>Office administration, expense tracking and auditing, compliance, automation, IT support, project coordination and liaison duties</p><br><br>
+      <strong>Fun Fact:</strong> <p>He ensures that he is a constant gym rat to stay sane, focused and energized.</p><br><br>
+      <strong>Invested Since:</strong> <p>2017</p>
+    </div>
+  </div>
+
+  <div id="cathy-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">  <img src="https://assets.cdn.filesafe.space/QvdmKDKOqF54gPMj0J13/media/6848b5f82c3d760d346acb8f.png" alt="Cathy" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Cathy</h1>
+        <span>Client & Employee Relations</span>
+      </div>
+      <strong>Background:</strong> <p>She has started out as a telemarketer, who eventually embraced her role in sales and client relations.  Cathy understands that good quality services of our staff is key when she presents the business.  And so she also involves herself in employee relations to fully collaborate with the team and make sure that our service is at its best.</p><br><br>
+      <strong>Specialties:</strong> <p>Marketing, business development, client relations, operations</p><br><br>
+      <strong>Fun Fact:</strong> <p>You will never see her in a bad mood.  She will be the sweetest co-worker you will ever have!  She has the kindest heart, and loves Jesus the most.</p><br><br>
+      <strong>Invested Since:</strong> <p>2016</p>
+    </div>
+  </div>
+
+  <div id="nikka-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">  <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6830afb3dd67d1db3987ac92.png" alt="Nikka" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Nikka</h1>
+        <span>Recruitment Department Manager</span>
+      </div>
+      <strong>Background:</strong> <p>Holds a degree in Psychology and a love for Talent Acquisition. She has built a strong foundation in workforce sourcing and recruitment, progressing from Recruitment Officer to leading the Recruitment Department.</p><br><br>
+      <strong>Specialties:</strong> <p>Recruitment strategies, talent sourcing, candidate evaluation, onboarding processes, administrative tasks, and team management</p><br><br>
+      <strong>Fun Fact:</strong> <p>Nikka is a former introvert who now enjoys her weekdays filled with conversations with total strangers looking for work.  She enjoys changing her hair color every month to the colors of the rainbow depending on her mood.</p><br><br>
+      <strong>Invested Since:</strong> <p>2021</p>
+    </div>
+  </div>
+
+  <div id="ailyn-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">  <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/68111299eb94a8a2250add7a.png" alt="Ailyn" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>Ailyn</h1>
+        <span>Employee Relations Officer</span>
+      </div>
+      <strong>Background:</strong> <p>Specializing in psychometrics, human resources, and education, her expertise helps her understand employee behavior and organizational dynamics, enabling her to effectively address both individual and organizational needs.  She is one of the leaders who makes sure that we create a positive work environment, resolve conflicts, and employee well-being and productivity is boosted.</p><br><br>
+      <strong>Specialties:</strong> <p>Employee relations, coaching & mentoring and leadership program development</p><br><br>
+      <strong>Fun Fact:</strong> <p>Aside from spending time with her little princess, her favorite pastime is working.</p><br><br>
+      <strong>Invested Since:</strong> <p>2021</p>
+    </div>
+  </div>
+
+  <div id="april-popup" class="profile-container">
+    <button class="button-close"></button>
+    <div class="left-image-side">  <img src="https://storage.googleapis.com/msgsndr/QvdmKDKOqF54gPMj0J13/media/6830aef4be318f21c19ec283.png" alt="april" /></div>
+    <div class="right-side-text">
+      <div class="header-profile">
+        <h1>April</h1>
+        <span>Human Resources Specialist</span>
+      </div>
+      <strong>Background:</strong> <p>A Certified Human Resource Associate (CHRA) who has a strong background in Labor Laws.  She is also in charge of onboarding & offboarding staff and ensures strict government mandated compliance.</p><br><br>
+      <strong>Specialties:</strong> <p>Compensation and benefits, HR Compliance</p><br><br>
+      <strong>Fun Fact:</strong> <p>She has always wondered why people would be crazy to wake up in the morning to run.  Out of curiosity, she now runs 4AM everyday.</p><br><br>
+      <strong>Invested Since:</strong> <p>2021</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- End of Popup -->
+
+
+<script>
+  //document.addEventListener("DOMContentLoaded", function () {
+  let popupScriptInitialized = false; // Flag to avoid re-initialization
+
+  function initializePopupScript() {
+    if (popupScriptInitialized) return; // Avoid double-init
+    //if (window.innerWidth > 1024) return;
+
+    popupScriptInitialized = true;
+
+    const profileMap = {
+      "thea-profile": "thea-popup",
+      "alexa-profile": "alexa-popup",
+      "jessica-profile": "jessica-popup",
+      "elle-profile": "elle-popup",
+      "cathy-profile": "cathy-popup",
+      "nikka-profile": "nikka-popup",
+      "april-profile": "april-popup",
+      "ailyn-profile": "ailyn-popup",
+      "kenneth-profile": "kenneth-popup",
+    };
+
+    const container = document.querySelector(".popup-ls-container");
+
+    // Attach click listeners to profile links
+    Object.keys(profileMap).forEach(linkId => {
+      const link = document.getElementsByClassName(linkId);
+      const popupId = profileMap[linkId];
+      const popup = document.getElementById(popupId);
+
+      Array.from(link).forEach(a => {
+        if (link && popup) {
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Hide all popups first
+            document.querySelectorAll('.profile-container').forEach(p => p.style.display = "none");
+            // Show container and selected popup
+            container.style.display = "flex";
+            popup.style.display = "flex";
+          });
+        }
+      })
+    });
+
+    // Close buttons
+    document.querySelectorAll(".button-close").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const popup = this.closest(".profile-container");
+        popup.style.display = "none";
+        container.style.display = "none";
+      });
+    });
+
+    // Optional: click outside popup to close
+    container.addEventListener("click", function (e) {
+      if (e.target === container) {
+        container.style.display = "none";
+        document.querySelectorAll('.profile-container').forEach(p => p.style.display = "none");
+      }
+    });
+  }
+
+  // Initialize on load if screen is <= 1024px
+  //initializePopupScript();
+
+  // Also initialize if screen is resized to 1024px or less
+  window.addEventListener("resize", function () {
+    if (window.innerWidth <= 1024) {
+      //initializePopupScript();
+    }
+  });
+  //});
+
+  function setupMobileSlider() {
+    const track = document.querySelector(".slide-track");
+
+    // Avoid running if track missing, or already cloned
+    if (!track || track.dataset.cloned === "true") return;
+
+    const children = Array.from(track.children);
+
+    // Clone each slide (including tooltips)
+    children.forEach(child => {
+      const clone = child.cloneNode(true);
+
+      // Add slide-clone class to hide slides on desktop
+      clone.classList.add("slide-clone");
+      // Remove IDs to prevent duplication conflicts
+      clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+
+      track.appendChild(clone);
+    });
+
+    // Mark track as cloned to avoid repeating the process
+    track.dataset.cloned = "true";
+
+    // After cloning, set the correct width for the track
+    setTrackWidth();
+    initializePopupScript();
+  }
+
+  function setTrackWidth() {
+    const track = document.querySelector(".slide-track");
+    const slides = track.querySelectorAll(".slide");
+    const gap = 10; // matches your CSS gap
+    const slideWidth = slides[0].offsetWidth;
+
+    // Total width = slide width * number of slides + total gap space
+    const totalWidth = (slideWidth * slides.length) + (gap * (slides.length - 1));
+    track.style.width = `${totalWidth}px`;
+  }
+
+  // Call setup on DOM load and resize
+  document.addEventListener("DOMContentLoaded", () => {
+    setupMobileSlider();
+  });
+
+  /*window.addEventListener("resize", () => {
+		setupMobileSlider();
+	});*/
+
+</script>
