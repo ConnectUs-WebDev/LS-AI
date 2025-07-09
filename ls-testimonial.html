@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <p class="testimonial">"The quality of the leads are very good. I feel that you do a great job setting the opportunity(setting the stage) for the next call from our agents."</p>
+      <br>
+      <p class="testimonial-name">J. Fekech - Colorado</p>
+    </div>
+    <div class="swiper-slide">
+      <p class="testimonial">"We have been associated with Linkserve since 2016. We are well pleased with the staff, their work ethic, and the quality of our leads.  The staff is very helpful, and try to accomplish anything that we ask.  They are very accessible and return emails swiftly.  We appreciate all that they do for our company."</p>
+      <br>
+      <p class="testimonial-name">R. Williams - North Carolina</p>
+    </div>
+    <div class="swiper-slide">
+      <p class="testimonial">"Since that date we have enjoyed a fantastic working relationship and intend to continue. I know you are doing your very best to give us what we ask and always deliver. Have a fantastic Christmas and all the best for 2020. I hope our working relationship continues to be fantastic."</p>
+      <br>
+      <p class="testimonial-name">D. Hilditch - Texas</p>
+    </div>
+    <div class="swiper-slide">
+      <p class="testimonial">"The team at LinkServe has always been very responsive to our needs.  They are agile and able to update or course correct our campaigns in a timely manner.  They are the only company we outsource these efforts to."</p>
+      <br>
+      <p class="testimonial-name">D. Selden - Colorado</p>
+    </div>
+    <!--<div class="swiper-slide">
+      <p class="testimonial">"I didn’t expect to be so blown away, but they really overdelivered. The team is professional, friendly, and incredibly efficient. I’ll be telling everyone I know about this!"<p>
+      <br>
+      <p class="testimonial-name">Tom R. from Chicago, IL</p>
+    </div>-->
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+
+ 
+
+<!-- Initialize Swiper -->
+<script>
+    window.onload = function () {
+      new Swiper(".mySwiper", {
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        autoplay: {
+          delay: 5000,
+        },
+      });
+    };
+  </script>
+  
+
+<style>
+  /* Testimonial Banner Swiper */
+  .swiper {
+      width: 1000px;
+      height: 100%;
+  }
+
+  .swiper-wrapper {
+      width: 100% !important;
+      margin: auto;
+  }
+
+  .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      display: block;
+      justify-content: center;
+      align-items: center;
+      width: 80% !important;
+      margin: 0 10% !important;
+  }
+
+  .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+      color: #470607 !important;
+      margin-left: -10px !important;
+      margin-right: -10px !important;
+  }
+
+  .testimonial {
+      color: black;
+      font-family: "roboto";
+      font-style: italic;
+      margin-bottom: 10px;
+  }
+
+  .testimonial-name {
+      color: black;
+      font-family: "roboto";
+      font-size: 18px;
+      font-weight: 500;
+  }
+
+  @media only screen and (max-width: 1000px) {
+      .swiper {
+          width: 100%;
+      }
+  }
+</style>
